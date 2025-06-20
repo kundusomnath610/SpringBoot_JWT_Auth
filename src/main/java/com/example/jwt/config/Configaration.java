@@ -23,19 +23,25 @@ public class Configaration {
     @Bean
     public UserDetailsService userDetailsService() {
         /*
-        * This is for the Admin User Configuration
+        * This is for the Admin User Configuration.
+        * For using this PassWord we Should be
+        * encoded the Password using password Encoder
+        * Method.
         */
         UserDetails adminUser = User.builder()
                 .username("Admin")
-                .password("Admin")
+                .password(passwordEncoder().encode("Admin"))
                 .roles("ADMIN").build();
 
         /*
          * This is for Normal User Configuration
+         * For using this PassWord we Should be
+         * encoded the Password using password Encoder
+         * Method.
          */
         UserDetails user = User.builder()
                 .username("User")
-                .password("User")
+                .password(passwordEncoder().encode("User"))
                 .roles("USER").build();
 
         return new InMemoryUserDetailsManager(adminUser, user); // This is for the Save In memory
